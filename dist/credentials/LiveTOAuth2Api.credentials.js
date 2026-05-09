@@ -10,19 +10,22 @@ class LiveTOAuth2Api {
         this.documentationUrl = liveTReleaseConfig_1.liveTDocumentationUrl;
         this.properties = [
             {
+                displayName: "Grant Type",
+                name: "grantType",
+                type: "hidden",
+                default: "pkce",
+            },
+            {
                 displayName: "Client ID",
                 name: "clientId",
-                type: "string",
-                default: "",
-                required: true,
+                type: "hidden",
+                default: "live-t-n8n",
             },
             {
                 displayName: "Client Secret",
                 name: "clientSecret",
-                type: "string",
-                typeOptions: { password: true },
+                type: "hidden",
                 default: "",
-                required: true,
             },
             {
                 displayName: "Authorization URL",

@@ -32,16 +32,22 @@ test("credential exposes only client credentials as visible fields", () => {
     .filter((property) => property.type !== "hidden")
     .map((property) => property.name);
 
-  assert.deepEqual(visiblePropertyNames, ["clientId", "clientSecret"]);
+  assert.deepEqual(visiblePropertyNames, []);
 });
 
 test("credential hidden URLs resolve from release config", () => {
   const credential = new LiveTOAuth2Api();
+  const grantType = credential.properties.find((property) => property.name === "grantType");
+  const clientId = credential.properties.find((property) => property.name === "clientId");
+  const clientSecret = credential.properties.find((property) => property.name === "clientSecret");
   const authUrl = credential.properties.find((property) => property.name === "authUrl");
   const accessTokenUrl = credential.properties.find(
     (property) => property.name === "accessTokenUrl",
   );
 
+  assert.equal(grantType.default, "pkce");
+  assert.equal(clientId.default, "live-t-n8n");
+  assert.equal(clientSecret.default, "");
   assert.equal(authUrl.default, `${liveTWebBaseUrl}/oauth/authorize`);
   assert.equal(accessTokenUrl.default, `${liveTApiBaseUrl}/oauth/token`);
   assert.equal(credential.test.request.baseURL, liveTApiBaseUrl);

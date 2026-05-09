@@ -26,9 +26,9 @@ n8n notes:
 ## Credentials
 
 Create `Live.τ OAuth2 API` credentials:
-
-- Client ID from your backend `OAUTH_CLIENTS_JSON` entry for `live-t-n8n`.
-- Client secret from the same `OAUTH_CLIENTS_JSON` entry.
+- open the credential
+- use the OAuth Redirect URL that n8n shows
+- click `Connect to Live.τ`
 
 n8n generates the OAuth callback URL for the credential. In self-hosted n8n it
 normally uses:
@@ -44,7 +44,7 @@ callback:
 ```json
 {
   "client_id": "live-t-n8n",
-  "client_secret": "replace-with-secret",
+  "client_type": "public",
   "name": "n8n",
   "redirect_uris": [],
   "redirect_uri_policy": {
@@ -57,7 +57,8 @@ callback:
 ```
 
 The node itself already knows the Live.τ API and web endpoints. Users should
-not enter backend or frontend URLs manually.
+not enter backend or frontend URLs manually, and the OAuth flow uses PKCE
+instead of a distributed client secret.
 
 ## Trigger
 

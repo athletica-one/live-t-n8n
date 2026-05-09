@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-live-t",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Live.τ automation triggers for n8n",
   "main": "dist/nodes/LiveTTrigger.node.js",
   "files": [
