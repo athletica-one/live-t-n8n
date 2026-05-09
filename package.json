@@ -1,0 +1,51 @@
+{
+  "name": "n8n-nodes-live-t",
+  "version": "0.1.0",
+  "description": "Live.τ automation triggers for n8n",
+  "main": "dist/nodes/LiveTTrigger.node.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node scripts/write-release-config.mjs && tsc -p tsconfig.json",
+    "test": "npm run build && node --test",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "n8n-community-node-package",
+    "live-t",
+    "automation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/athletica-one/live-t-n8n.git"
+  },
+  "homepage": "https://github.com/athletica-one/live-t-n8n",
+  "bugs": {
+    "url": "https://github.com/athletica-one/live-t-n8n/issues"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.10"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "n8n-workflow": "^1.82.0",
+    "typescript": "^5.4.0"
+  },
+  "n8n": {
+    "credentials": [
+      "dist/credentials/LiveTOAuth2Api.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/LiveTTrigger.node.js"
+    ]
+  }
+}
