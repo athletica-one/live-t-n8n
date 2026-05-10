@@ -3,6 +3,8 @@ import type {
   IHookFunctions,
   INodeType,
   INodeTypeDescription,
+  ITriggerFunctions,
+  ITriggerResponse,
   IWebhookFunctions,
   IWebhookResponseData,
 } from "n8n-workflow";
@@ -12,6 +14,7 @@ import {
   endpointFor,
   normalizeEvent,
   rawBody,
+  sampleEndpointFor,
   verifySignature,
 } from "./LiveTTransport";
 
@@ -121,6 +124,25 @@ export class LiveTTrigger implements INodeType {
       },
     },
   };
+
+  async trigger(this: ITriggerFunctions): Promise<ITriggerResponse> {
+    const eventGroup = this.getNodeParameter("eventGroup") as
+      | "checkpoint_action"
+      | "session_event"
+      | "suunto_workout";
+
+    const sample = await this.helpers.requestOAuth2.call(this, "liveTOAuth2Api", {
+      method: "GET",
+      url: `${liveTApiBaseUrl}${sampleEndpointFor(eventGroup)}`,
+      json: true,
+    });
+
+    return {
+      manualTriggerResponse: Promise.resolve([
+        this.helpers.returnJsonArray([normalizeEvent(sample)]),
+      ]),
+    };
+  }
 
   async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
     const req = this.getRequestObject();

@@ -5,6 +5,7 @@ const assert = require("node:assert/strict");
 const {
   endpointFor,
   normalizeEvent,
+  sampleEndpointFor,
   signatureFor,
   verifySignature,
 } = require("../dist/nodes/LiveTTransport");
@@ -24,6 +25,21 @@ test("endpointFor maps trigger groups to n8n backend hooks", () => {
   );
   assert.equal(endpointFor("session_event"), "/n8n/hooks/session-event");
   assert.equal(endpointFor("suunto_workout"), "/n8n/hooks/suunto-workout");
+});
+
+test("sampleEndpointFor maps trigger groups to n8n sample hooks", () => {
+  assert.equal(
+    sampleEndpointFor("checkpoint_action"),
+    "/n8n/hooks/checkpoint-action/sample",
+  );
+  assert.equal(
+    sampleEndpointFor("session_event"),
+    "/n8n/hooks/session-event/sample",
+  );
+  assert.equal(
+    sampleEndpointFor("suunto_workout"),
+    "/n8n/hooks/suunto-workout/sample",
+  );
 });
 
 test("credential exposes only client credentials as visible fields", () => {

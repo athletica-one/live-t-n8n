@@ -97,6 +97,19 @@ class LiveTTrigger {
             },
         };
     }
+    async trigger() {
+        const eventGroup = this.getNodeParameter("eventGroup");
+        const sample = await this.helpers.requestOAuth2.call(this, "liveTOAuth2Api", {
+            method: "GET",
+            url: `${liveTReleaseConfig_1.liveTApiBaseUrl}${(0, LiveTTransport_1.sampleEndpointFor)(eventGroup)}`,
+            json: true,
+        });
+        return {
+            manualTriggerResponse: Promise.resolve([
+                this.helpers.returnJsonArray([(0, LiveTTransport_1.normalizeEvent)(sample)]),
+            ]),
+        };
+    }
     async webhook() {
         const req = this.getRequestObject();
         const body = this.getBodyData();

@@ -1,4 +1,4 @@
-import type { IHookFunctions, INodeType, INodeTypeDescription, IWebhookFunctions, IWebhookResponseData } from "n8n-workflow";
+import type { IHookFunctions, INodeType, INodeTypeDescription, ITriggerFunctions, ITriggerResponse, IWebhookFunctions, IWebhookResponseData } from "n8n-workflow";
 export declare class LiveTTrigger implements INodeType {
     description: INodeTypeDescription;
     webhookMethods: {
@@ -8,5 +8,6 @@ export declare class LiveTTrigger implements INodeType {
             delete(this: IHookFunctions): Promise<boolean>;
         };
     };
+    trigger(this: ITriggerFunctions): Promise<ITriggerResponse>;
     webhook(this: IWebhookFunctions): Promise<IWebhookResponseData>;
 }

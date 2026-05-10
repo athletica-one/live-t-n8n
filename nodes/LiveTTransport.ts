@@ -16,6 +16,10 @@ export function endpointFor(eventGroup: EventGroup): string {
   return "/n8n/hooks/session-event";
 }
 
+export function sampleEndpointFor(eventGroup: EventGroup): string {
+  return `${endpointFor(eventGroup)}/sample`;
+}
+
 export function signatureFor(
   secret: string,
   timestamp: string,

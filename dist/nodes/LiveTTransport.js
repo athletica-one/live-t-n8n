@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.endpointFor = endpointFor;
+exports.sampleEndpointFor = sampleEndpointFor;
 exports.signatureFor = signatureFor;
 exports.verifySignature = verifySignature;
 exports.rawBody = rawBody;
@@ -14,6 +15,9 @@ function endpointFor(eventGroup) {
         return "/n8n/hooks/suunto-workout";
     }
     return "/n8n/hooks/session-event";
+}
+function sampleEndpointFor(eventGroup) {
+    return `${endpointFor(eventGroup)}/sample`;
 }
 function signatureFor(secret, timestamp, body) {
     const digest = (0, crypto_1.createHmac)("sha256", secret)
